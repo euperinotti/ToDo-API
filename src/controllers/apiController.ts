@@ -12,7 +12,15 @@ export const toDoAll = async (req: Request, res: Response) => {
 }
 
 export const toDoAdd = async (req: Request, res: Response) => {
+    if(req.body.title){
+        let newToDo = await ToDo.create({
+            title: req.body.title
+        })
 
+        res.status(201).json({item: newToDo});
+    }
+
+    res.json({erro: "Dados não enviados"});
 }
 
 export const toDoUpdate = async (req: Request, res: Response) => {

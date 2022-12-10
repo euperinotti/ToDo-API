@@ -55,6 +55,12 @@ export const toDoUpdate = async (req: Request, res: Response) => {
 }
 
 export const toDoDelete = async (req: Request, res: Response) => {
+    let { id } = req.params;
 
+    let toDo = await ToDo.findByPk(id);
+
+    if(toDo){
+        await toDo.destroy();
+    }
 }
 

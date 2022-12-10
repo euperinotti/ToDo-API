@@ -24,7 +24,34 @@ export const toDoAdd = async (req: Request, res: Response) => {
 }
 
 export const toDoUpdate = async (req: Request, res: Response) => {
-    
+    let { id } = req.params;
+
+    let toDo = await ToDo.findByPk(id);
+
+    if (toDo){
+        if (req.body.title){
+            toDo.title = req.body.title;
+        }
+
+        if (req.body.done){
+            switch(req.body.done.toLowerCase()) {
+                case "true":
+                case "1":
+                    toDo.done = true;
+                    break;
+
+                case "false":
+                case "0":
+                    toDo.done = false;
+                    break;
+
+            }
+        }
+
+        await toDo.save();
+
+        res.json({ item: toDo });
+    }
 }
 
 export const toDoDelete = async (req: Request, res: Response) => {

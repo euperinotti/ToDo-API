@@ -6,7 +6,7 @@ const router = Router();
 router.get('/ping', API.ping);
 
 router.get('/todo', API.toDoAll);
-router.get('/todo', API.toDoAdd);
+router.post('/todo', API.toDoAdd);
 router.put('/todo/:id', API.toDoUpdate)
 router.delete('/todo/:id', API.toDoDelete);
 
